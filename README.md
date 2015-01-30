@@ -23,15 +23,25 @@ Optional ENV VARS:
 
 #### EC2 instance with IAM profile
 
+Read the docker logs from /var/lib/docker/containers:
+
 ```sh
-docker run -ti -h $(hostname) -p 5141:5141/udp \
+docker run -d --name fluentd \
+  -v /var/lib/docker:/tmp/lib/docker -h $(hostname) \
+  planitar/fluentd
+```
+
+Read the docker logs from 5141/udp streamed by logspout:
+
+```sh
+docker run -d --name fluentd -p 5141:5141/udp -h $(hostname) \
   planitar/fluentd
 ```
 
 #### Specific keys
 
 ```sh
-docker run -ti -h $(hostname) -p 5141:5141/udp \
+docker run -d --name fluentd -h $(hostname) -p 5141:5141/udp \
   -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
   -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
   planitar/fluentd
@@ -40,7 +50,7 @@ docker run -ti -h $(hostname) -p 5141:5141/udp \
 #### Specific temporal keys
 
 ```sh
-docker run -ti -h $(hostname) -p 5141:5141/udp \
+docker run -d --name fluentd -h $(hostname) -p 5141:5141/udp \
   -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
   -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
   -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \

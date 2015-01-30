@@ -1,6 +1,9 @@
 
-The container runs `fluentd` configured to accept docker logs on `5141/udp`
-port.
+The container runs `fluentd` configured read docker logs from
+`/tmp/lib/docker/containers` directory.
+Configure `fluentd` config to accept docker logs streamed by logspout
+on `5141/udp` port.
+
 Each docker log line is expected to be a JSON object structured as follows:
  - `name`: container name
  - `id`: container id

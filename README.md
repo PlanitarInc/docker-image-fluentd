@@ -11,7 +11,7 @@ Each docker log line is expected to be a JSON object structured as follows:
  - `data`: a single logged line
 
 Fluentd stores hourly every stream of every container to a separate file on S3:
- - `logs/docker/%YYYY-%MM-%DD/${hostname}/${name}-${id}_${type}.%HH.gz`
+ - `logs/docker/%YYYY-%MM-%DD/${hostname}/${name}-${id}_${type}.%HH:00.gz`
 every line is a JSON object structured as follows:
  - `timestamp`: a timestamp with millisecond resolution (`%Y-%m-%dT%H:%M:%S.%L%z')
  - `message`: a single logged line (original `data` field)

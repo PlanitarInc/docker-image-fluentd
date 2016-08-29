@@ -1,12 +1,13 @@
 FROM planitar/dev-ruby
 
-RUN gem install --no-ri --no-rdoc fluentd:0.12.4 \
+RUN gem install json --version "< 2"
+RUN gem install --conservative --no-ri --no-rdoc fluentd:0.12.4 \
     fluent-plugin-record-reformer fluent-plugin-forest && \
     mkdir /src && cd /src && \
       git clone https://github.com/PlanitarInc/fluent-plugin-s3 && \
       cd fluent-plugin-s3 && \
       gem build fluent-plugin-s3.gemspec && \
-      gem install --no-ri --no-rdoc fluent-plugin-s3-plntr && \
+      gem install --conservative --no-ri --no-rdoc fluent-plugin-s3-plntr && \
     rm -r /src && \
     mkdir /src && cd /src && \
       git clone https://github.com/PlanitarInc/fluent-plugin-docker-format \

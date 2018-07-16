@@ -24,4 +24,4 @@ ENV AWS_S3_BUCKET system.plntr.ca
 
 EXPOSE 5141
 
-ENTRYPOINT ["/usr/bin/fluentd", "--use-v1-config", "-c", "/etc/fluent/fluentd.conf"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/bin/fluentd", "--use-v1-config", "-c", "/etc/fluent/fluentd.conf"]
